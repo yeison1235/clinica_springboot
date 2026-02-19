@@ -58,3 +58,6 @@ public class Acudiente {
     
 }
 
+//crear, modificar, consultar cedula del acudiente, 
+// registrar el animal: crear, modificar, consultar el animal con cedula del acudiente
+// historial clinico; 
