@@ -1,14 +1,11 @@
 package com.example.holamundo.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Optional;
 
-import com.example.holamundo.model.Acudiente;
+import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.holamundo.model.Animal;
 
 public interface AnimalRepository extends JpaRepository<Animal, Long> {
+        Optional<Animal> findByDocumento(String nombre);
 
-
-    
-
-    
 }
