@@ -1,18 +1,25 @@
 package com.example.holamundo.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class AcudienteResponse {
+public class HistorialClinicoRequest {
 
-    private long Id; 
+    
     private String nombre;
-    private String telefono;    
+    @NotBlank
+    private String telefono;
+    @NotBlank
     private String telefono2;
+    @NotBlank
     private String direccion;
+    @NotBlank
     private String correo;
+    @NotBlank
     private String documento;
+
     
 }

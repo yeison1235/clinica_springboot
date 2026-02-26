@@ -6,22 +6,24 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AnimalRequest {
+public class AnimalResponse {
 
+    private long Id;
+    
     private String nombre;
-    @NotBlank
+
     private String especie;
-    @NotBlank
+
     private String raza;
-    @NotBlank
+
     private String edad;
-    @NotBlank
+
     private String peso;
-    @NotBlank
+
     private String fechaNacimiento;
-    @NotBlank
+
     private String sexo;
 
-    @NotBlank
     private long acudienteId;
+
 }

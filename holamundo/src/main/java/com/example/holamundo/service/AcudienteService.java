@@ -1,13 +1,16 @@
 package com.example.holamundo.service;
 
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.holamundo.dto.AcudienteRequest;
 import com.example.holamundo.dto.AcudienteResponse;
+
 import com.example.holamundo.model.Acudiente;
 import com.example.holamundo.repository.AcudienteRepository;
-
-import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
@@ -23,7 +26,7 @@ public class AcudienteService {
     public AcudienteResponse crear(AcudienteRequest request) {
         Acudiente acudiente = new Acudiente();
         applyRequest(acudiente, request);
-        Acudiente saved = acudienteRepository.save(acudiente);
+        Acudiente saved = acudienteRepository.save(acudiente);// guardar el acudiente en la base de datos
         return toResponse(saved);
     }
 
@@ -39,16 +42,38 @@ public class AcudienteService {
         return toResponse(acudiente);
     }
 
-    public void eliminar(long id){
+    public AcudienteResponse actualizar (long id, AcudienteRequest request){
+        Acudiente acudiente = findAcudiente(id);
+        applyRequest(acudiente, request);
+        return toResponse(acudienteRepository.save(acudiente));
+
+    }
+
+
+    public void eliminar(long id) {
         Acudiente acudiente = findAcudiente(id);
         acudienteRepository.delete(acudiente);
     }
 
-    private Acudiente findAcudiente(long id){
-        return acudienteRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("acudiente no encontrado"));
+    @Transactional(readOnly = true)
+    public AcudienteResponse obtenerPorId(Long id) {
+        Acudiente acudiente = findAcudiente(id);
+        acudiente = acudienteRepository.findById(id).orElseThrow();
+        return toResponse(acudiente);
+
+    }
 
 
-    } 
+ 
+    // private Acudiente findAcudiente(long id){
+    // return acudienteRepository.findById(id).orElseThrow(()-> new
+    // ResourceNotFoundException("acudiente no encontrado"));
+
+         
+    private Acudiente findAcudiente(Long id ){
+        return acudienteRepository.findById(id).orElseThrow(()->new RuntimeException("acudiente no encontrado por id"  + id ));
+
+    }
 
     private void applyRequest(Acudiente acudiente, AcudienteRequest request) {
         acudiente.setNombre(request.getNombre());
@@ -59,7 +84,7 @@ public class AcudienteService {
         acudiente.setEmail(request.getCorreo());
     }
 
-    private AcudienteResponse toRepResponse(Acudiente acudiente){
+    private AcudienteResponse toResponse(Acudiente acudiente) {
         AcudienteResponse response = new AcudienteResponse();
         response.setId(acudiente.getId());
         response.setNombre(acudiente.getNombre());
@@ -69,8 +94,6 @@ public class AcudienteService {
         response.setTelefono2(acudiente.getTelefono2());
         response.setDireccion(acudiente.getDireccion());
         return response;
-    
+
     }
 }
-
-

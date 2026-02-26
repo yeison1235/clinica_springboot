@@ -6,6 +6,8 @@ import com.example.holamundo.model.Acudiente;
 
 public interface AcudienteRepository  extends JpaRepository<Acudiente, Long> {
     Optional<Acudiente> findByDocumento(String documento);
+
+    
     
     
 }

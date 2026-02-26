@@ -64,5 +64,15 @@ public class Animal {
     @OneToMany(mappedBy = "animal", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     private List<HistorialClinico> animales = new ArrayList<>();
+
+    public String getDireccion() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getDireccion'");
+    }
+
+    public String getTelefono2() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getTelefono2'");
+    }
     
 }
