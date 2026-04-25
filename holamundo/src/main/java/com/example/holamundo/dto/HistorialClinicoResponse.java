@@ -5,8 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AcudienteResponse {
-
+public class HistorialClinicoResponse {
+    
     private long Id; 
     private String nombre;
     private String telefono;    
@@ -15,4 +15,5 @@ public class AcudienteResponse {
     private String correo;
     private String documento;
     
+
 }
